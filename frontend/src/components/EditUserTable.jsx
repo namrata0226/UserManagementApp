@@ -13,7 +13,7 @@ const EditUserTable = () => {
 
   const { userid } = useParams();
   useEffect(() => {
-    axios.get(`http://localhost:3000/${userid}`).then(({ data }) => {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/${userid}`).then(({ data }) => {
       setFirstName(data.firstname);
       setLastName(data.lastname);
       setEmail(data.email);
@@ -23,7 +23,7 @@ const EditUserTable = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3000/${userid}`, userData).then(() => {
+    await axios.put(`${import.meta.env.VITE_BASE_URL}/${userid}`, userData).then(() => {
       navigate("/");
     });
   };

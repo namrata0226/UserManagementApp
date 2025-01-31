@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+// console.log(import.meta.env.VITE_BASE_URL);
+
 const CreateUserTable = () => {
   const navigate = useNavigate();
   const [firstname, setFirstName] = useState("");
@@ -25,17 +27,18 @@ const CreateUserTable = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); 
+    setErrorMessage("");
     const error = validateForm();
     if (error) {
       setErrorMessage(error);
       return;
     }
     try {
-      await axios.post("http://localhost:3000/add", userData);
+    
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/add`, userData);
       navigate("/");
-    } catch (err){
-      setErrorMessage("Failed to create user. Please try again.",err);
+    } catch (err) {
+      setErrorMessage("Failed to create user. Please try again.", err);
     }
   };
 

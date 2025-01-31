@@ -5,7 +5,7 @@ const UserTable = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:3000/")
+    fetch(`${import.meta.env.VITE_BASE_URL}/`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.log(err));
@@ -16,7 +16,7 @@ const UserTable = () => {
   };
   const removeDetails = (id) => {
     if (window.confirm("You want to delete details")) {
-      axios.delete(`http://localhost:3000/${id}`).then(() => {
+      axios.delete(`${import.meta.env.VITE_BASE_URL}/${id}`).then(() => {
         //window.alert("User Removed Successfully");
         window.location.reload();
       });
