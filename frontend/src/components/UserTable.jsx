@@ -30,11 +30,10 @@ const UserTable = () => {
         <div className="heading-text">
           <h2>User Management System</h2>
         </div>
-        <div className="heading-button  mb-3">
-          {" "}
+        <div className="text-center mb-3">
           <Link
             to={"/user/create"}
-            className="btn btn-add btn-primary add-button"
+            className="btn btn-add btn-primary "
           >
             Add User
           </Link>
@@ -46,19 +45,24 @@ const UserTable = () => {
             <div className="card">
               <div className="card-body ">
                 <div className="d-flex justify-content-between">
-                <h3 className="card-title ">
-                  {user.firstname} {user.lastname}
-                </h3>
-                <div>
-                <button className="btn btn-primary ms-1" onClick={() => editDetails(user._id)}>
-                  <i className="bi bi-pencil-square"></i>
-                </button>
-                <button
-                  className="btn btn-danger ms-1"
-                  onClick={() => removeDetails(user._id)}
-                >
-                  <i className="bi bi-trash"></i>
-                </button></div></div>
+                  <h3 className="card-title ">
+                    {user.firstname} {user.lastname}
+                  </h3>
+                  <div>
+                    <button
+                      className="btn btn-primary ms-1"
+                      onClick={() => editDetails(user._id)}
+                    >
+                      <i className="bi bi-pencil-square"></i>
+                    </button>
+                    <button
+                      className="btn btn-danger ms-1"
+                      onClick={() => removeDetails(user._id)}
+                    >
+                      <i className="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
                 <p className="card-text mb-1">+91 {user.phone}</p>
                 <p className="card-text ">{user.email}</p>
               </div>

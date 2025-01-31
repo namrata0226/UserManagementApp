@@ -20,30 +20,21 @@ body {
 
 .user-card {
   border-radius: 4px;
-
 }
 
 .card {
   background-color: #e0e1dd;
 }
 
-.heading-button {
-  margin-left: auto;
-  width: 60%;
-}
 input {
   margin-bottom: 5px;
-
 }
-
 
 .btn:hover {
   scale: 110%;
   box-shadow: 0 8px 8px rgba(72, 72, 72, 0.1);
 }
-.add-button {
-  width: 7rem;
-}
+
 
 .error-message {
   color: red;

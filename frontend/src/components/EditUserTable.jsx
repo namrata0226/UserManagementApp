@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import axios from "axios";
+import validateInput from "../utils/validation";
 const EditUserTable = () => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [validation, setValidation] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const userData = { firstname, lastname, email, phone };
 
   const navigate = useNavigate();
@@ -23,11 +25,20 @@ const EditUserTable = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .put(`${import.meta.env.VITE_BASE_URL}/${userid}`, userData)
-      .then(() => {
-        navigate("/");
-      });
+    const error = validateInput(userData);
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
+    try {
+      await axios
+        .put(`${import.meta.env.VITE_BASE_URL}/${userid}`, userData)
+        .then(() => {
+          navigate("/");
+        });
+    } catch (err) {
+      alert("Failed to edit details. Please refresh the page.", err);
+    }
   };
   return (
     <div className="container">
@@ -100,6 +111,7 @@ const EditUserTable = () => {
           <span className="error-message">Please enter your phone</span>
         )}
         <br />
+        <p className="error-message">{errorMessage}</p>
         <button className="btn btn-save btn-primary m-1">Save</button>
         <Link to={"/"} className="btn btn-back btn-dark m-1">
           Back

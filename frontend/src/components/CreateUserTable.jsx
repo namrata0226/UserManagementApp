@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-
-// console.log(import.meta.env.VITE_BASE_URL);
+import validateInput from "../utils/validation";
 
 const CreateUserTable = () => {
   const navigate = useNavigate();
@@ -14,21 +13,11 @@ const CreateUserTable = () => {
   const userData = { firstname, lastname, email, phone };
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validateForm = () => {
-    const nameRegex = /^[A-Za-z]{2,}$/;
-    const phoneRegex = /^[0-9]{10}$/;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!nameRegex.test(firstname)) return "Invalid First Name";
-    if (!nameRegex.test(lastname)) return "Invalid Last Name";
-    if (!phoneRegex.test(phone)) return "Invalid Phone Number";
-    if (!emailRegex.test(email)) return "Invalid Email Address";
 
-    return null;
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    const error = validateForm();
+    const error = validateInput(userData);
     if (error) {
       setErrorMessage(error);
       return;
@@ -37,7 +26,7 @@ const CreateUserTable = () => {
       await axios.post(`${import.meta.env.VITE_BASE_URL}/add`, userData);
       navigate("/");
     } catch (err) {
-      setErrorMessage("Failed to create user. Please try again.", err);
+      alert("Failed to create user. Please refresh the page.", err);
     }
   };
 
@@ -113,7 +102,7 @@ const CreateUserTable = () => {
           <span className="error-message">Please enter your phone</span>
         )}
         <br />
-
+        <p className="error-message">{errorMessage}</p>
         <button className="btn btn-save btn-primary m-2">Save</button>
         <Link to={"/"} className="btn btn-back btn-dark">
           Back
