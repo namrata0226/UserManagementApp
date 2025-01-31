@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BASE_URL}/`)
+    fetch("https://user-management-app-rose-seven.vercel.app")
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.log(err));
@@ -14,6 +15,7 @@ const UserTable = () => {
   const editDetails = (id) => {
     navigate("/edit/" + id);
   };
+
   const removeDetails = (id) => {
     if (window.confirm("You want to delete details")) {
       axios.delete(`${import.meta.env.VITE_BASE_URL}/${id}`).then(() => {
