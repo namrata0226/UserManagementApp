@@ -31,7 +31,7 @@ const EditUserTable = () => {
   };
   return (
     <div className="container">
-      <h1 className="heading text-capitalize fs-3">Edit user details</h1>
+      <h3 className="fw-bold text-center ">Edit User Details</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-floating">
           <input

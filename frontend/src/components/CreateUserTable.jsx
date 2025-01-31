@@ -43,7 +43,7 @@ const CreateUserTable = () => {
 
   return (
     <div className="container">
-      <h1>Add new user</h1>
+      <h3 className="fw-bold text-center">Add New User</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-floating">
           <input
