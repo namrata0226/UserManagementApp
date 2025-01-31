@@ -25,7 +25,7 @@ const EditUserTable = () => {
     e.preventDefault();
     await axios.put(`http://localhost:3000/${userid}`, userData).then(() => {
       navigate("/");
-    }, []);
+    });
   };
   return (
     <div className="container">

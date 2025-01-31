@@ -23,10 +23,10 @@ const CreateUserTable = () => {
 
     return null;
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:3000/create', userData).then(() => {
+    await axios.post("http://localhost:3000/add", userData).then(() => {
       navigate("/");
     });
   };
