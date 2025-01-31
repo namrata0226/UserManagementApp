@@ -8,7 +8,8 @@ require("dotenv").config({
 });
 
 const app = express();
-app.use(cors({ origin: "https://user-management-app-rose-seven.vercel.app/" }));
+app.use(cors());
+app.use(cors({ origin: "*", credentials: true }));
 app.use(bodyParser.json());
 
 app.post("/add", async (req, res) => {
