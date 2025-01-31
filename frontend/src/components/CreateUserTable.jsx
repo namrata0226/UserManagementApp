@@ -10,26 +10,35 @@ const CreateUserTable = () => {
   const [phone, setPhone] = useState("");
   const [validation, setValidation] = useState(false);
   const userData = { firstname, lastname, email, phone };
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const validateForm = ({ firstName, lastName, phone, email }) => {
+  const validateForm = () => {
     const nameRegex = /^[A-Za-z]{2,}$/;
     const phoneRegex = /^[0-9]{10}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!nameRegex.test(firstName)) return "Invalid First Name";
-    if (!nameRegex.test(lastName)) return "Invalid Last Name";
+    if (!nameRegex.test(firstname)) return "Invalid First Name";
+    if (!nameRegex.test(lastname)) return "Invalid Last Name";
     if (!phoneRegex.test(phone)) return "Invalid Phone Number";
     if (!emailRegex.test(email)) return "Invalid Email Address";
 
     return null;
   };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3000/add", userData).then(() => {
+    setErrorMessage(""); 
+    const error = validateForm();
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
+    try {
+      await axios.post("http://localhost:3000/add", userData);
       navigate("/");
-    });
+    } catch (err){
+      setErrorMessage("Failed to create user. Please try again.",err);
+    }
   };
+
   return (
     <div className="container">
       <h1>Add new user</h1>

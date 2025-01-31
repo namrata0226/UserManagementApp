@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ConfirmationModal from "./CornfirmMsg";
 import axios from "axios";
 const UserTable = () => {
   const [users, setUsers] = useState([]);
-  console.log(users);
   const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:3000/")
@@ -79,7 +77,6 @@ const UserTable = () => {
           </tbody>
         </table>
       </div>
-      <ConfirmMessage show={!!confirmDelete} onHide={() => setConfirmDelete(null)} onConfirm={confirmDeleteUser} />
     </div>
   );
 };
