@@ -6,7 +6,7 @@ const UserTable = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("https://user-management-app-rose-seven.vercel.app")
+    fetch(`${import.meta.env.VITE_BASE_URL}/`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.log(err));

@@ -23,9 +23,11 @@ const EditUserTable = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`${import.meta.env.VITE_BASE_URL}/${userid}`, userData).then(() => {
-      navigate("/");
-    });
+    await axios
+      .put(`${import.meta.env.VITE_BASE_URL}/${userid}`, userData)
+      .then(() => {
+        navigate("/");
+      });
   };
   return (
     <div className="container">
