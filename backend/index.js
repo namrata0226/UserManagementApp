@@ -10,6 +10,17 @@ require("dotenv").config({
 const app = express();
 app.use(cors());
 app.use(cors({ origin: "*", credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://user-management-app-rose-seven.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 app.post("/add", async (req, res) => {
