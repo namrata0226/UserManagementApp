@@ -8,19 +8,18 @@ require("dotenv").config({
 });
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "https://user-management-app-7mk9.vercel.app" }));
 app.use(bodyParser.json());
 
-app.post('/add', async (req, res) => {
+app.post("/add", async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    res.send('data saved successfully');
+    res.send("data saved successfully");
   } catch (err) {
     res.status(400).send(err.message);
   }
 });
-
 
 app.get("/", async (req, res) => {
   try {
