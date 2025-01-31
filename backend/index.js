@@ -13,6 +13,7 @@ app.use(cors({ origin: "*", credentials: true }));
 const allowedOrigins = [
   "http://localhost:5173",
   "https://user-management-app-rose-seven.vercel.app",
+  "https://user-management-app-9s6b.vercel.app/",
 ];
 
 app.use(
