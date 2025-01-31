@@ -34,7 +34,6 @@ const CreateUserTable = () => {
       return;
     }
     try {
-    
       await axios.post(`${import.meta.env.VITE_BASE_URL}/add`, userData);
       navigate("/");
     } catch (err) {
