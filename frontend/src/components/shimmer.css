@@ -1,8 +1,8 @@
 /* From Uiverse.io by Nawsome */
 .loader {
   position: relative;
-  width: 400px;
-  height: 150px;
+  width: 380px;
+  height: 170px;
   margin: 10px;
   border: 1px solid #d3d3d3;
   padding: 15px;
@@ -70,4 +70,3 @@
     transform: translateX(100%);
   }
 }
-
