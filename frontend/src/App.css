@@ -11,19 +11,14 @@ body {
   border-radius: 5px;
   margin-top: 40px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  /* background-color: rgba(226, 220, 226, 0.672);
-   */
   padding: 10px;
   background-color: rgb(158, 206, 232);
   background-color: #778da9;
 }
 
-.user-card {
-  border-radius: 4px;
-}
-
 .card {
   background-color: #e0e1dd;
+  height: 170px;
 }
 
 input {
@@ -35,9 +30,17 @@ input {
   box-shadow: 0 8px 8px rgba(72, 72, 72, 0.1);
 }
 
-
 .error-message {
   color: red;
   font-size: small;
   margin-left: 5px;
+}
+@media only screen and (max-width: 768px) {
+  .user-card {
+    width: 100%;
+  }
+  .shimmer-card {
+    width: 100%;
+    flex-direction: column;
+  }
 }
