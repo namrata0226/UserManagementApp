@@ -26,11 +26,26 @@ app.use(bodyParser.json());
 
 app.post("/add", async (req, res) => {
   try {
-    const user = new User(req.body);
-    await user.save();
-    res.send("data saved successfully");
-  } catch (err) {
-    res.status(400).send(err.message);
+    const { firstname, lastname, email, phone } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Email already exists" });
+    }
+
+    const newUser = new User({ firstname, lastname, email, phone });
+    await newUser.save();
+
+    res.status(201).json({
+      success: true,
+      message: "User added successfully",
+      user: newUser,
+    });
+  } catch (error) {
+    console.error("Error adding user:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
 

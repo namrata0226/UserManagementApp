@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Shimmer from "./Shimmer";
+import Swal from "sweetalert2";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [loader, setLoader] = useState(true);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BASE_URL}/`)
       .then((res) => res.json())
@@ -22,13 +24,36 @@ const UserTable = () => {
     navigate("/edit/" + id);
   };
 
-  const removeDetails = (id) => {
-    if (window.confirm("You want to delete details")) {
-      axios.delete(`${import.meta.env.VITE_BASE_URL}/${id}`).then(() => {
-        //window.alert("User Removed Successfully");
-        window.location.reload();
-      });
-    }
+  const removeDetails = async (id) => {
+   
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${import.meta.env.VITE_BASE_URL}/${id}`);
+          setUsers(users.filter((user) => user._id !== id)); 
+          Swal.fire({
+            title: "Deleted!",
+            text: "The user has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to delete user.",
+            icon: "error",
+          });
+          console.error("Error deleting user:", error);
+        }
+      }
+    });
   };
 
   return (
@@ -45,7 +70,7 @@ const UserTable = () => {
       </div>
       {loader ? (
         <div className="d-flex  shimmer-card ">
-          <Shimmer /> <Shimmer /> <Shimmer /> 
+          <Shimmer /> <Shimmer /> <Shimmer />
         </div>
       ) : (
         <div className="card-container d-flex flex-wrap ">
@@ -89,4 +114,3 @@ const UserTable = () => {
 };
 
 export default UserTable;
-

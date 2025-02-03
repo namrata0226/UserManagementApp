@@ -13,21 +13,26 @@ const CreateUserTable = () => {
   const userData = { firstname, lastname, email, phone };
   const [errorMessage, setErrorMessage] = useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     const error = validateInput(userData);
+
     if (error) {
       setErrorMessage(error);
       return;
     }
-    try {
-      await axios.post(`${import.meta.env.VITE_BASE_URL}/add`, userData);
-      navigate("/");
-    } catch (err) {
-      alert("Failed to create user. Please refresh the page.", err);
-    }
+  
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/add`, userData)
+      .then(()=>navigate("/"))
+      .catch((err)=>{
+        if(err.status==401)
+          setErrorMessage("Email already exists")
+       console.log(err);
+       
+      })
+   
+    
   };
 
   return (
@@ -108,6 +113,7 @@ const CreateUserTable = () => {
           Back
         </Link>
       </form>
+     
     </div>
   );
 };
