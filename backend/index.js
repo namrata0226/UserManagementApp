@@ -78,9 +78,13 @@ app.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { firstname, lastname, email, phone } = req.body;
+
     if (!firstname || !lastname || !email || !phone) {
       return res.status(400).json({ message: "All fields are required" });
     }
+    const existingUser = await User.findOne({ email });
+    
+
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });

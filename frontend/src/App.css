@@ -39,6 +39,10 @@ input {
   color: red;
   font-size: small;
   margin-left: 5px;
+  margin-bottom: 2px;
+}
+.card-container {
+  margin-left: 3rem;
 }
 @media only screen and (max-width: 543px) {
   .user-card {
@@ -51,10 +55,13 @@ input {
   .form-container {
     width: 100%;
   }
+  .card-container {
+    margin-left: 0.5rem;
+  }
 }
 @media only screen and (min-width: 544px) and (max-width: 992px) {
   .user-card {
-    width: 45%;
+    width: 100%;
   }
   .shimmer-card {
     width: 45%;
@@ -62,5 +69,8 @@ input {
   }
   .form-container {
     width: 32rem;
+  }
+  .card-container {
+    margin-left: 0.5rem;
   }
 }

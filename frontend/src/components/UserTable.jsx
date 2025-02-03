@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Shimmer from "./Shimmer";
 import Swal from "sweetalert2";
+import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlinePhone } from "react-icons/md";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
@@ -25,7 +27,6 @@ const UserTable = () => {
   };
 
   const removeDetails = async (id) => {
-   
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -38,7 +39,7 @@ const UserTable = () => {
       if (result.isConfirmed) {
         try {
           await axios.delete(`${import.meta.env.VITE_BASE_URL}/${id}`);
-          setUsers(users.filter((user) => user._id !== id)); 
+          setUsers(users.filter((user) => user._id !== id));
           Swal.fire({
             title: "Deleted!",
             text: "The user has been deleted.",
@@ -98,8 +99,14 @@ const UserTable = () => {
                         </button>
                       </div>
                     </div>
-                    <p className="card-text mb-1">+91 {user.phone}</p>
-                    <p className="card-text  ">{user.email}</p>
+                    <p className="card-text mb-1">
+                      {" "}
+                      <MdOutlinePhone /> +91 {user.phone}
+                    </p>
+                    <p className="card-text  ">
+                      {" "}
+                      <MdOutlineEmail /> {user.email}
+                    </p>
                   </div>
                 </div>
               </div>
